@@ -5,6 +5,6 @@ IPSec secret <%= @secret %>
 Xauth username <%= @username %>
 Xauth password <%= @password %>
 
-<% @options.each do |key,value| -%>
+<% @options.sort.each do |key,value| -%>
 <%= key %> <%= value %>
 <% end -%>

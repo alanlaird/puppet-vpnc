@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class vpnc {
+class vpnc inherits vpnc::params {
 
     package { "vpnc":
         ensure    => present

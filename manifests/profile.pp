@@ -20,17 +20,17 @@ define vpnc::profile (
 
   if $create_init {
 
-    file {"/etc/init.d/vpnc-${name}":
+    file { "${vpnc::params::init_path}vpnc-${name}${vpnc::params::init_append}" :
       ensure  => file,
-      content => template('vpnc/initscript.erb'),
+      content => template($vpnc::params::init_template),
       mode    => '0755',
     }
 
     service {"vpnc-${name}":
       enable     => $onboot,
-      hasrestart => false,
-      hasstatus  => false,
-      require    => File["/etc/init.d/vpnc-${name}"],
+      hasrestart => $vpnc::params::hasrestart,
+      hasstatus  => $vpnc::params::hasstatus,
+      require    => File["${vpnc::params::init_path}vpnc-${name}${vpnc::params::init_append}"],
     }
   }
 

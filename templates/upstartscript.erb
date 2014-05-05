@@ -1,0 +1,10 @@
+# vpnc upstart service manifest
+
+start on runlevel [2345]
+stop on runlevel [06]
+
+limit nofile 20000 20000
+kill timeout 20
+respawn
+
+exec /usr/sbin/vpnc-connect /etc/vpnc/<%= @name %>.conf --no-detach
