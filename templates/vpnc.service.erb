@@ -1,0 +1,21 @@
+[Unit]
+Description=Free Cisco VPN connection to %i
+Documentation=man:vpnc(8) http://www.unix-ag.uni-kl.de/~massar/vpnc/
+Requires=network.target
+After=network.target
+ConditionPathExists=dev/net/tun
+
+[Service]
+Type=forking
+EnvironmentFile=/etc/vpnc/%i.conf
+PIDFile=/var/run/vpnc/%i.pid
+
+#ExecStartPre=-/etc/vpnc/scripts.d/%i-preup.sh
+ExecStart=/usr/sbin/vpnc --pid-file /run/vpnc/%i.pid /etc/vpnc/<%= @name %>.conf
+#ExecStartPost=-/etc/vpnc/scripts.d/%i-postup.sh
+
+ExecStop=/usr/sbin/vpnc-disconnect
+#ExecStopPost=-/etc/vpnc/scripts.d/%i-postdown.sh
+
+[Install]
+WantedBy=multi-user.target
