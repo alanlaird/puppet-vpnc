@@ -1,3 +1,21 @@
 vpnc
 
 This is the vpnc module.
+
+usage:
+
+node foo {
+  package { 'epel-release':
+    ensure => present,
+  }
+  vpnc::profile { 'default':
+    id          => 'priovation',
+    gateway     => 'prvpn.iovation.com',
+    secret      => 'notreally',
+    username    => 'alaird',
+    password    => 'notreally',
+    options     => ['IKE Authmode psk'],
+    create_init => true,
+    on_boot     => true,
+  }
+}
