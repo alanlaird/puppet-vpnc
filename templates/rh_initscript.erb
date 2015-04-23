@@ -13,14 +13,14 @@
 
 case "$1" in
   start)
-        log_daemon_msg "Starting VPN connection" "vpnc-<%= @name %>"
+        echo -n "Starting VPN connection" 
         /usr/sbin/vpnc /etc/vpnc/<%= @name %>.conf
-        return $?
+        exit $?
     ;;
   stop)
-        log_daemon_msg "Stopping VPN connection" "vpnc-<%= @name %>"
+        echo -n "Stopping VPN connection" 
         /usr/sbin/vpnc-disconnect
-        return $?
+        exit $?
     ;;
   *)
     echo "Usage: /etc/init.d/vpnc-<%= @name %> {start|stop}"
