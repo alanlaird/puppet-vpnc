@@ -1,0 +1,32 @@
+#! /bin/sh
+#
+# simple vpnc init.d script for rh systems
+#
+# chkconfig: 2345 10 90
+# description: Starts and stops VPNC service
+
+# Source function library.
+. /etc/init.d/functions
+
+# Check that networking is up.
+[ "${NETWORKING}" = "no" ] && exit 6
+
+case "$1" in
+  start)
+        log_daemon_msg "Starting VPN connection" "vpnc-<%= @name %>"
+        /usr/sbin/vpnc-connect /etc/vpnc/<%= @name %>.conf
+        log_end_msg $?
+    ;;
+  stop)
+        log_daemon_msg "Stopping VPN connection" "vpnc-<%= @name %>"
+        /usr/sbin/vpnc-disconnect
+        log_end_msg $?
+    ;;
+  *)
+    echo "Usage: /etc/init.d/vpnc-<%= @name %> {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
+
