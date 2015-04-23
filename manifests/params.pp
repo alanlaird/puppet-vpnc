@@ -8,7 +8,7 @@ class vpnc::params {
       $hasrestart = true
       $hasstatus  = true
     }
-    'default': {
+    default: {
       $init_path = '/etc/init.d/'
       $init_append = ''
       $init_template = 'vpnc/initscript.erb'
