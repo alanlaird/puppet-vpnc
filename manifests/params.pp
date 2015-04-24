@@ -14,15 +14,15 @@ class vpnc::params {
           $init_path = '/etc/init.d/'
           $init_append = ''
           $init_template = 'vpnc/rh_initscript.erb'
-          $hasrestart = false
-          $hasstatus  = false
+          $hasrestart = true
+          $hasstatus  = true
         }
         '7': {
-          $init_path = '/usr/lib/systemd/system'
-          $init_append = ''
+          $init_path = '/usr/lib/systemd/system/'
+          $init_append = '.service'
           $init_template = 'vpnc/vpnc.service.erb'
-          $hasrestart = false
-          $hasstatus  = false
+          $hasrestart = true
+          $hasstatus  = true
         }
       }
     }
